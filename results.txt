@@ -1,0 +1,120 @@
+(venv) PS C:\Users\FA004\Desktop\satimg2> & C:/Users/FA004/Desktop/satimg2/venv/Scripts/python.exe c:/Users/FA004/Desktop/satimg2/comparisions/comparison_models.py
+⚠️  Using default paths. To specify custom paths, use:
+   python c:/Users/FA004/Desktop/satimg2/comparisions/comparison_models.py <csv_path> <image_dir>
+
+📂 Current paths:
+   CSV: C:\Users\FA004\Desktop\satimg2\data.csv
+   Images: C:\Users\FA004\Desktop\satimg2\images_png_view
+
+================================================================================
+🔬 RUNNING COMPREHENSIVE MODEL COMPARISON
+================================================================================
+
+📂 Loading single-frame data...
+   Total rows: 10842
+   Countries: 85
+   Date range: 2010-01-01 00:00:00 to 2025-02-01 00:00:00
+
+🖼️ Loading images...
+✅ Loaded 9893 samples
+   Images shape: (9893, 64, 64, 3)
+   Features shape: (9893, 6)
+   Features: log_population, log_area, log_density, month_sin, month_cos, year_normalized
+
+📊 Data Split:
+   Train: 6907 samples
+   Val: 1032 samples
+   Test: 1954 samples
+
+💻 Using device: cuda
+
+================================================================================
+📊 MODEL 1: Linear Regression
+================================================================================
+📊 Test Results:
+   R² = 0.1838
+   RMSE = 480.47 kWh
+   MAPE = 110.30%
+   WAPE = 60.01%
+
+================================================================================
+🎯 MODEL 2: Support Vector Machine
+================================================================================
+🚂 Training SVM...
+📊 Test Results:
+   R² = 0.6349
+   RMSE = 321.32 kWh
+   MAPE = 144.44%
+   WAPE = 45.75%
+
+================================================================================
+⚡ MODEL 3: EfficientNet-B6 + Tabular (43M params)
+================================================================================
+Downloading: "https://download.pytorch.org/models/efficientnet_b6_lukemelas-24a108a5.pth" to C:\Users\FA004/.cache\torch\hub\checkpoints\efficientnet_b6_lukemelas-24a108a5.pth
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 165M/165M [00:01<00:00, 113MB/s]
+🔧 Initialized: EfficientNet-B6 + Tabular (pretrained, 43M params)
+🚂 Training for 50 epochs...
+   Epoch [5/50] - Train Loss: 0.3680, Val Loss: 0.2539
+   Epoch [10/50] - Train Loss: 0.2797, Val Loss: 0.2003
+   Epoch [15/50] - Train Loss: 0.1980, Val Loss: 0.1425
+   Epoch [20/50] - Train Loss: 0.2017, Val Loss: 0.1443
+   Epoch [25/50] - Train Loss: 0.1740, Val Loss: 0.1716
+   Early stopping at epoch 29
+✅ Training complete! Best val loss: 0.1294
+📊 Test Results:
+   R² = 0.9602
+   RMSE = 106.05 kWh
+   MAPE = 41.50%
+   WAPE = 15.54%
+
+================================================================================
+🏗️  MODEL 4: ResNet-101 + Tabular (44.5M params)
+================================================================================
+Downloading: "https://download.pytorch.org/models/resnet101-cd907fc2.pth" to C:\Users\FA004/.cache\torch\hub\checkpoints\resnet101-cd907fc2.pth
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 171M/171M [00:01<00:00, 116MB/s]
+🔧 Initialized: ResNet-101 + Tabular (pretrained, 44.5M params)
+🚂 Training for 50 epochs...
+   Epoch [5/50] - Train Loss: 0.3510, Val Loss: 0.2770
+   Epoch [10/50] - Train Loss: 0.2400, Val Loss: 0.1411
+   Epoch [15/50] - Train Loss: 0.1832, Val Loss: 0.2053
+   Epoch [20/50] - Train Loss: 0.1575, Val Loss: 0.1457
+   Epoch [25/50] - Train Loss: 0.1478, Val Loss: 0.1894
+   Early stopping at epoch 29
+✅ Training complete! Best val loss: 0.1151
+📊 Test Results:
+   R² = 0.9249
+   RMSE = 145.74 kWh
+   MAPE = 52.82%
+   WAPE = 17.60%
+
+================================================================================
+✅ ALL COMPARISONS COMPLETE!
+================================================================================
+
+================================================================================
+📊 FINAL COMPARISON SUMMARY
+================================================================================
+
+Linear Regression:
+   R² = 0.1838
+   RMSE = 480.47 kWh
+   MAPE = 110.30%
+   WAPE = 60.01%
+
+SVM:
+   R² = 0.6349
+   RMSE = 321.32 kWh
+   MAPE = 144.44%
+   WAPE = 45.75%
+
+EfficientNet-B6 + Tabular:
+   R² = 0.9602
+   RMSE = 106.05 kWh
+   MAPE = 41.50%
+   WAPE = 15.54%
+
+ResNet-101 + Tabular:
+   R² = 0.9249
+   RMSE = 145.74 kWh
+   MAPE = 52.82%
+   WAPE = 17.60%
